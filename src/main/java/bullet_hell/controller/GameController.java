@@ -9,6 +9,8 @@ public class GameController {
 
     @FXML private Canvas gameCanvass;
     private Player player;
+
+    private Game game;
     
     /*
      *     
@@ -16,6 +18,13 @@ public class GameController {
     public GameController() {
     	setPlayer(new Player());
     }
+       
+
+    // This creates a game controller with a game already in progress. Aka loads a game
+    /*
+    public GameController(Game game){
+        this.game = game;
+    }*/
 
 	public Player getPlayer() {
 		return player;
@@ -24,5 +33,7 @@ public class GameController {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+
+    
 }
 
