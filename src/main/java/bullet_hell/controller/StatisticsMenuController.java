@@ -1,8 +1,18 @@
 package bullet_hell.controller;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.Parent;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
 public class StatisticsMenuController {
 
@@ -51,4 +61,25 @@ public class StatisticsMenuController {
     @FXML
     private Label stagesCompletedLabel;
 
+    @FXML
+    void backButtonPressed(ActionEvent event) {
+        try{
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/MainMenu.fxml"));
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setTitle("Space Shooter Main Menu");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch( IOException e ){
+            e.printStackTrace();
+        }
+    }
+    
+    public void initialize(){
+
+    }
 }
