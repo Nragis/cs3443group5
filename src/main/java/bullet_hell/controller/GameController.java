@@ -5,6 +5,8 @@ import bullet_hell.model.Player;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 
+import bullet_hell.model.Game;
+
 public class GameController {
 
     @FXML private Canvas gameCanvass;
