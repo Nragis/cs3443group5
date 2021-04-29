@@ -11,22 +11,23 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 public class MainMenuController {
+	
+    @FXML private Button startGameButton;
 
-    @FXML
-    private Button startGameButton;
+    @FXML private Button statisticsButton;
 
-    @FXML
-    private Button statisticsButton;
+    @FXML private Button optionsButton;
 
-    @FXML
-    private Button optionsButton;
-
-    @FXML
-    private Button quitButton;
-
-    @FXML
-    void startGameButtonPressed(ActionEvent event) {
-        try{
+    @FXML private Button quitButton;
+    
+    private GameController GameController;
+    
+    /*
+     * Loads game canvas once new game button is pressed
+     */
+    @FXML void startGameButtonPressed(ActionEvent event) {
+            	
+    	try{
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/GameCanvass.fxml"));
@@ -42,8 +43,7 @@ public class MainMenuController {
         }
     }
 
-    @FXML
-    void statisticsButtonPressed(ActionEvent event) {
+    @FXML void statisticsButtonPressed(ActionEvent event) {
         try{
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             
@@ -60,8 +60,7 @@ public class MainMenuController {
         }
     }
 
-    @FXML
-    void optionsButtonPressed(ActionEvent event) {
+    @FXML void optionsButtonPressed(ActionEvent event) {
         try{
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             
@@ -78,8 +77,7 @@ public class MainMenuController {
         }
     }
 
-    @FXML
-    void quitButtonPressed(ActionEvent event) {
+    @FXML void quitButtonPressed(ActionEvent event) {
         Stage stage = (Stage) quitButton.getScene().getWindow();
         stage.close();
     }
@@ -87,5 +85,13 @@ public class MainMenuController {
     public void initialize(){
 
     }
+
+	public GameController getGameController() {
+		return GameController;
+	}
+
+	public void setGameController(GameController gameController) {
+		GameController = gameController;
+	}
 
 }
