@@ -1,18 +1,21 @@
 package bullet_hell.controller;
 
+import bullet_hell.model.*;
+import javafx.fxml.*;
+import javafx.scene.canvas.*;
 
-import bullet_hell.model.Player;
-import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-
-import bullet_hell.model.Game;
-
+/*
+ * Controll for the main game
+ */
 public class GameController {
 
     @FXML private Canvas gameCanvass;
     
-    private Player player;
+    private Player playerInfo;
     private Game game;
+    private Enemy enemy;
+    private Projectile bullets;
+    private Entity entity;
     
     /*
      * Constructor
@@ -20,19 +23,12 @@ public class GameController {
      */
     public GameController() {
     	
-    	player = new Player();
-    	System.out.println(player.getPlayerLifes());
-    }
-       
-    //Getters and setters
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-
-    
+    	playerInfo = new Player();
+    	game = new Game();
+    	enemy = new Enemy();
+    	bullets = new Projectile();
+    	entity = new Entity();
+    	
+    	System.out.println("Hello");
+    }        
 }
-

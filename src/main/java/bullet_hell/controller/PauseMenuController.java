@@ -1,38 +1,27 @@
 package bullet_hell.controller;
 
 import java.io.IOException;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
+import javafx.event.*;
 
 public class PauseMenuController {
 
-    @FXML
-    private Button resumeButton;
+    @FXML private Button resumeButton;
 
-    @FXML
-    private Button returnToMenuButton;
+    @FXML private Button returnToMenuButton;
 
-    @FXML
-    private Button quitButton;
+    @FXML private Button quitButton;
 
     //private Game game;
 
-    @FXML
-    void resumeButtonPressed(ActionEvent event) {
+    @FXML void resumeButtonPressed(ActionEvent event) {
         try{
             Stage stage = (Stage) resumeButton.getScene().getWindow();
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/GameCanvass.fxml"));
-    
-            // Resumes the game. Requires Game class to be functional though
-            /*GameController gc = new GameController(this.game);
-            loader.setController(gc); */
 
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -45,8 +34,7 @@ public class PauseMenuController {
         }
     }
 
-    @FXML
-    void returnToMenuButtonPressed(ActionEvent event) {
+    @FXML void returnToMenuButtonPressed(ActionEvent event) {
         try{
             Stage stage = (Stage) returnToMenuButton.getScene().getWindow();
             
@@ -65,19 +53,15 @@ public class PauseMenuController {
         }
     }
 
-    @FXML
-    void quitButtonPressed(ActionEvent event) {
+    @FXML void quitButtonPressed(ActionEvent event) {
         Stage stage = (Stage) quitButton.getScene().getWindow();
     
         // Save current game to statistics
-
+        
+        
         stage.close();
     }
     
-    // Allows us to save the game
-    /*public PauseMenuController(Game game){
-        this.game = game;
-    }*/
 
     public void initialize(){
 

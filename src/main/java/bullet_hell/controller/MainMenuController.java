@@ -1,14 +1,11 @@
 package bullet_hell.controller;
 
 import java.io.IOException;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
+import javafx.event.*;
 
 public class MainMenuController {
 	
@@ -20,14 +17,17 @@ public class MainMenuController {
 
     @FXML private Button quitButton;
     
-    private GameController GameController;
-    
+    private GameController Game;
+        
     /*
      * Loads game canvas once new game button is pressed
+     * Initializes and object of gameController
      */
     @FXML void startGameButtonPressed(ActionEvent event) {
-            	
+             	
     	try{
+    		
+    		Game = new GameController();
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/GameCanvass.fxml"));
@@ -81,17 +81,5 @@ public class MainMenuController {
         Stage stage = (Stage) quitButton.getScene().getWindow();
         stage.close();
     }
-
-    public void initialize(){
-
-    }
-
-	public GameController getGameController() {
-		return GameController;
-	}
-
-	public void setGameController(GameController gameController) {
-		GameController = gameController;
-	}
 
 }
