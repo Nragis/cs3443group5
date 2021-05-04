@@ -6,18 +6,25 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import bullet_hell.remote.both.Task;
-import bullet_hell.remote.both.ServerInterface;
+import bullet_hell.remote.server.LeaderboardServerImpl;
+import bullet_hell.remote.pub.LeaderboardServer;
+import bullet_hell.model.Leaderboard;
 
-public class Server implements ServerInterface{
+public class LeaderboardServerImpl implements LeaderboardServer{
 
-	public Server(){
+	public LeaderboardServerImpl (){
 		super();
 	}
 
-	public <T> T executeTask(Task<T> task) {
+	public Leaderboard getLeaderboard(){
 		System.out.println("Task recieved");
-		return task.execute();
+		return Leaderboard.fromJson("leaderboard.json");
+	}
+
+	public void addScore(String name, int score){
+		Leaderboard leaderboard = Leaderboard.fromJson("leaderboard.json");
+		leaderboard.addScore(name, score);
+		leaderboard.toJson("leaderboard.json");
 	}
 
 	public static void main(String[] args){
@@ -27,9 +34,9 @@ public class Server implements ServerInterface{
         try {
 			System.setProperty("java.rmi.server.hostname","nragis.com");
             String name = "Server";
-            ServerInterface server = new Server();
-            ServerInterface stub =
-                (ServerInterface) UnicastRemoteObject.exportObject(server, 0);
+            LeaderboardServer server = new LeaderboardServerImpl();
+            LeaderboardServer stub =
+                (LeaderboardServer) UnicastRemoteObject.exportObject(server, 0);
             Registry registry = LocateRegistry.getRegistry();
             registry.rebind(name, stub);
             System.out.println("Server bound");
