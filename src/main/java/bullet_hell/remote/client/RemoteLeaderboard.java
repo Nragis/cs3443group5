@@ -1,9 +1,9 @@
-package bullet_hell.model.remote;
+package bullet_hell.remote.client;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import bullet_hell.model.remote.Server;
+import bullet_hell.remote.server.Server;
 import bullet_hell.model.Leaderboard;
 
 public class RemoteLeaderboard{

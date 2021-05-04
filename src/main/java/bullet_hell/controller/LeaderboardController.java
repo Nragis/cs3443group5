@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import bullet_hell.model.Leaderboard;
+import bullet_hell.remote.client.RemoteLeaderboard;
 
 public class LeaderboardController{
 
@@ -54,11 +55,17 @@ public class LeaderboardController{
 			this.localLeaderboard= new Leaderboard();
 		}
 		
+		RemoteLeaderboard remoteLeaderboard = new RemoteLeaderboard("67.11.114.111");
+		System.out.println("Remote leaderboard opened");
+
+		this.globalLeaderboard = remoteLeaderboard.getLeaderboard();
+		System.out.println("Remote leaderboard recieved");
+		
 		this.newRow.setPrefHeight(50);
 		
 		String[] names = this.localLeaderboard.getNames();
 		int[] scores = this.localLeaderboard.getScores();
-		for(int i = 0; i < this.localLeaderboard.getNames().length; i++){
+		for(int i = 0; i < names.length; i++){
 			Label name = new Label(names[i] + " - ");
 			Label score = new Label(Integer.toString(scores[i]));
 			name.setFont(new Font(16));
@@ -66,6 +73,18 @@ public class LeaderboardController{
 			this.localLeaderboardGridPane.getRowConstraints().add(newRow);
 			this.localLeaderboardGridPane.add(name, 0, i);
 			this.localLeaderboardGridPane.add(score, 1, i);
+		}
+
+		names = this.globalLeaderboard.getNames();
+		scores = this.globalLeaderboard.getScores();
+		for(int i = 0; i < names.length; i++){
+			Label name = new Label(names[i] + " - ");
+			Label score = new Label(Integer.toString(scores[i]));
+			name.setFont(new Font(16));
+			score.setFont(new Font(16));
+			this.globalLeaderboardGridPane.getRowConstraints().add(newRow);
+			this.globalLeaderboardGridPane.add(name, 0, i);
+			this.globalLeaderboardGridPane.add(score, 1, i);
 		}
 	}
 }

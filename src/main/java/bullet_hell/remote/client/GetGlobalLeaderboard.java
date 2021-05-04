@@ -1,6 +1,6 @@
-package bullet_hell.model.remote;
+package bullet_hell.remote.client;
 
-import bullet_hell.model.remote.Task;
+import bullet_hell.remote.both.Task;
 import bullet_hell.model.Leaderboard;
 
 import java.io.Serializable;

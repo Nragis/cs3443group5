@@ -1,4 +1,4 @@
-package bullet_hell.model.remote;
+package bullet_hell.remote.both;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

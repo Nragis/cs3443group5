@@ -1,4 +1,4 @@
-package bullet_hell.model.remote;
+package bullet_hell.remote.server;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -6,7 +6,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import bullet_hell.model.remote.Task;
+import bullet_hell.remote.both.Task;
+import bullet_hell.remote.both.ServerInterface;
 
 public class Server implements ServerInterface{
 
@@ -15,6 +16,7 @@ public class Server implements ServerInterface{
 	}
 
 	public <T> T executeTask(Task<T> task) {
+		System.out.println("Task recieved");
 		return task.execute();
 	}
 
