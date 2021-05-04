@@ -25,22 +25,12 @@ public class MainMenuController {
      */
     @FXML void startGameButtonPressed(ActionEvent event) {
              	
-    	try{
-    		
-    		Game = new GameController();
-            Stage stage = (Stage) startGameButton.getScene().getWindow();
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/GameCanvass.fxml"));
+    	Game = new GameController();		
+        
+    	Stage stage = (Stage) startGameButton.getScene().getWindow();
+      
+        Game.start(stage);
 
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setTitle("Space Shooter");
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
-        } catch( IOException e ){
-            e.printStackTrace();
-        }
     }
 
     @FXML void statisticsButtonPressed(ActionEvent event) {
