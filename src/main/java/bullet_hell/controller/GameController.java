@@ -1,13 +1,19 @@
 package bullet_hell.controller;
 
+import java.io.IOException;
+
 import bullet_hell.model.*;
 import javafx.fxml.*;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.*;
+import javafx.application.*;
+import javafx.stage.*;
 
 /*
  * Controll for the main game
  */
-public class GameController {
+public class GameController extends Application {
 
     @FXML private Canvas gameCanvass;
     
@@ -28,7 +34,26 @@ public class GameController {
     	enemy = new Enemy();
     	bullets = new Projectile();
     	entity = new Entity();
+    }   
+    
+    /*
+     * Creates stage for game
+     * 
+     * @param Stage stage
+     */	
+    @Override public void start(Stage stage) {
     	
-    	System.out.println("Hello");
-    }        
+    	try{
+            
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/GameCanvass.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setTitle("Space Shooter");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch( IOException e ){
+            e.printStackTrace();
+        }
+    }
 }
