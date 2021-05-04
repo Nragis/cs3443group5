@@ -1,0 +1,3 @@
+grant codeBase "file:/home/nragis/gitRepos/cs3443group5/-" {
+    permission java.security.AllPermission;
+};
