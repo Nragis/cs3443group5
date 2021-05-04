@@ -19,7 +19,7 @@ public class MainMenuController {
     private Button statisticsButton;
 
     @FXML
-    private Button optionsButton;
+    private Button leaderboardButton;
 
     @FXML
     private Button quitButton;
@@ -61,15 +61,15 @@ public class MainMenuController {
     }
 
     @FXML
-    void optionsButtonPressed(ActionEvent event) {
+    void leaderboardButtonPressed(ActionEvent event) {
         try{
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/OptionsMenu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/LeaderboardMenu.fxml"));
 
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            stage.setTitle("Space Shooter Options");
+            stage.setTitle("Space Shooter Leaderboard");
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();

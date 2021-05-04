@@ -57,9 +57,9 @@ public class StatisticsMenuController {
 			this.stats = new Statistics();
 		}
 
-		this.attemptsLabel.setText(Integer.toString(this.stats.getAttempts()));
-		this.timePlayedLabel.setText(Integer.toString(this.stats.getTimePlayed()));
-		this.bulletsFiredLabel.setText(Integer.toString(this.stats.getBulletsFired()));
-		this.stagesCompletedLabel.setText(Integer.toString(this.stats.getStagesCompleted()));
+		this.attemptsLabel.setText("Attempts: " + Integer.toString(this.stats.getAttempts()));
+		this.timePlayedLabel.setText("Time Played: " + Integer.toString(this.stats.getTimePlayed()));
+		this.bulletsFiredLabel.setText("Bullets Fired: " + Integer.toString(this.stats.getBulletsFired()));
+		this.stagesCompletedLabel.setText("Stages Completed: " + Integer.toString(this.stats.getStagesCompleted()));
     }
 }

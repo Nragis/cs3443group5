@@ -12,18 +12,19 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Leaderboard{
-	private String[] names = new String[100];
-	private int[] scores = new int[100];
+	private String[] names;
+	private int[] scores;
 	
 	/**
 	 * Empty constructor
 	 */
 	public Leaderboard(){
-		for( String s : this.names){
-			s = "";
-		}
-		for( int n : this.scores ){
-			n = 0;
+		this.names = new String[100];
+		this.scores = new int[100];
+
+		for( int i = 0; i < 100; i++){
+			this.names[i] = "abcde";
+			this.scores[i] = 0;
 		}
 	}
 
