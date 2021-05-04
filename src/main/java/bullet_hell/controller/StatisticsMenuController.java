@@ -1,5 +1,6 @@
 package bullet_hell.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -14,52 +15,21 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+import bullet_hell.model.Statistics;
+
 public class StatisticsMenuController {
 
-    @FXML
-    private Button backButton;
+    @FXML private Button backButton;
 
-    @FXML
-    private Label highScoreName1;
+    @FXML private Label attemptsLabel;
 
-    @FXML
-    private Label highScoreNumber1;
+    @FXML private Label timePlayedLabel;
 
-    @FXML
-    private Label highScoreName2;
+    @FXML private Label bulletsFiredLabel;
 
-    @FXML
-    private Label highScoreName3;
+    @FXML private Label stagesCompletedLabel;
 
-    @FXML
-    private Label highScoreName4;
-
-    @FXML
-    private Label highScoreName5;
-
-    @FXML
-    private Label highScoreNumber2;
-
-    @FXML
-    private Label highScoreNumber3;
-
-    @FXML
-    private Label highScoreNumber4;
-
-    @FXML
-    private Label highScoreNumber5;
-
-    @FXML
-    private Label attemptsLabel;
-
-    @FXML
-    private Label timePlayedLabel;
-
-    @FXML
-    private Label bulletsFiredLabel;
-
-    @FXML
-    private Label stagesCompletedLabel;
+	private Statistics stats;
 
     @FXML
     void backButtonPressed(ActionEvent event) {
@@ -80,6 +50,16 @@ public class StatisticsMenuController {
     }
     
     public void initialize(){
+		File f = new File("statistics.json");
+		if( f.exists() ){
+			this.stats = Statistics.fromJson("statistics.json");
+		} else {
+			this.stats = new Statistics();
+		}
 
+		this.attemptsLabel.setText(Integer.toString(this.stats.getAttempts()));
+		this.timePlayedLabel.setText(Integer.toString(this.stats.getTimePlayed()));
+		this.bulletsFiredLabel.setText(Integer.toString(this.stats.getBulletsFired()));
+		this.stagesCompletedLabel.setText(Integer.toString(this.stats.getStagesCompleted()));
     }
 }
