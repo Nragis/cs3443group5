@@ -19,9 +19,9 @@ public class Server implements ServerInterface{
 	}
 
 	public static void main(String[] args){
-		if (System.getSecurityManager() == null) {
+		/*if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
-        }
+        }*/
         try {
 			System.setProperty("java.rmi.server.hostname","nragis.com");
             String name = "Server";

@@ -15,9 +15,9 @@ public class RemoteLeaderboard{
 	}
 
 	public Leaderboard getLeaderboard(){
-		if (System.getSecurityManager() == null) {
+		/*if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
-        }
+        }*/
         try {
             Registry registry = LocateRegistry.getRegistry(ip);
             Server server = (Server) registry.lookup("Server");
@@ -30,9 +30,9 @@ public class RemoteLeaderboard{
 	}
 
 	public void addScore(String name, int score){
-		if (System.getSecurityManager() == null) {
+		/*if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
-        }
+        }*/
         try {
             Registry registry = LocateRegistry.getRegistry(ip);
             Server server = (Server) registry.lookup("Server");
