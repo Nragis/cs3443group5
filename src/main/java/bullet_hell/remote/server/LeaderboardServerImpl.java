@@ -1,5 +1,7 @@
 package bullet_hell.remote.server;
 
+import java.io.File;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -11,20 +13,27 @@ import bullet_hell.remote.pub.LeaderboardServer;
 import bullet_hell.model.Leaderboard;
 
 public class LeaderboardServerImpl implements LeaderboardServer{
+	
+	private Leaderboard leaderboard;
 
 	public LeaderboardServerImpl (){
 		super();
+
+		File f = new File("leaderboard.json");
+		if( f.exists() ){
+			this.leaderboard = Leaderboard.fromJson("leaderboard.json");
+		} else {
+			this.leaderboard = new Leaderboard();
+		}
 	}
 
 	public Leaderboard getLeaderboard(){
-		System.out.println("Task recieved");
-		return Leaderboard.fromJson("leaderboard.json");
+		return this.leaderboard;
 	}
 
 	public void addScore(String name, int score){
-		Leaderboard leaderboard = Leaderboard.fromJson("leaderboard.json");
-		leaderboard.addScore(name, score);
-		leaderboard.toJson("leaderboard.json");
+		this.leaderboard.addScore(name, score);
+		this.leaderboard.toJson("leaderboard.json");
 	}
 
 	public static void main(String[] args){
