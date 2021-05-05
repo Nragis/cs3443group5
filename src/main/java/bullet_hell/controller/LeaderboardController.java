@@ -58,7 +58,7 @@ public class LeaderboardController{
 		RemoteLeaderboard remoteLeaderboard = new RemoteLeaderboard("nragis.com");
 		System.out.println("Remote leaderboard opened");
 
-		//this.globalLeaderboard = remoteLeaderboard.getLeaderboard();
+		this.globalLeaderboard = remoteLeaderboard.getLeaderboard();
 		System.out.println("Remote leaderboard recieved");
 		
 		this.newRow.setPrefHeight(50);
@@ -75,7 +75,7 @@ public class LeaderboardController{
 			this.localLeaderboardGridPane.add(score, 1, i);
 		}
 
-		names = remoteLeaderboard.getLeaderboard().getNames();
+		names = this.globalLeaderboard.getNames();
 		scores = this.globalLeaderboard.getScores();
 		for(int i = 0; i < names.length; i++){
 			Label name = new Label(names[i] + " - ");

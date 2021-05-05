@@ -8,7 +8,7 @@ import bullet_hell.model.Leaderboard;
 
 public class RemoteLeaderboard{
 	
-	LeaderboardServer server;
+	private LeaderboardServer server;
 
 	public RemoteLeaderboard(String ip){
 		try {
@@ -25,7 +25,7 @@ public class RemoteLeaderboard{
 		} catch( Exception e){
 			e.printStackTrace();
 		}
-		return null;
+		return new Leaderboard();
 	}
 
 	public void addScore(String name, int score){

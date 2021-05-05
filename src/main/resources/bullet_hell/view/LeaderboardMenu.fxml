@@ -29,7 +29,7 @@
       </ScrollPane>
       <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="339.0" prefHeight="250.0" prefWidth="772.0" vbarPolicy="ALWAYS">
          <content>
-            <AnchorPane minHeight="248.0" minWidth="754.0" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane minHeight="248.0" minWidth="754.0">
                <children>
                   <GridPane fx:id="globalLeaderboardGridPane" layoutX="16.0" layoutY="14.0" prefHeight="50.0" prefWidth="723.0">
                      <columnConstraints>
