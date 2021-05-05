@@ -5,13 +5,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.Reader;
 import java.io.IOException;
+import java.io.Serializable;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class Leaderboard{
+public class Leaderboard implements Serializable{
 	private String[] names;
 	private int[] scores;
 	
