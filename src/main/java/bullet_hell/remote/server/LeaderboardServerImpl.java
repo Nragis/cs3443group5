@@ -28,15 +28,12 @@ public class LeaderboardServerImpl implements LeaderboardServer{
 	}
 
 	public static void main(String[] args){
-		/*if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-        }*/
         try {
 			System.setProperty("java.rmi.server.hostname","nragis.com");
-            String name = "Server";
+            String name = "LeaderboardServer";
             LeaderboardServer server = new LeaderboardServerImpl();
             LeaderboardServer stub =
-                (LeaderboardServer) UnicastRemoteObject.exportObject(server, 0);
+                (LeaderboardServer) UnicastRemoteObject.exportObject(server, 1056);
             Registry registry = LocateRegistry.getRegistry();
             registry.rebind(name, stub);
             System.out.println("Server bound");

@@ -13,7 +13,7 @@ public class RemoteLeaderboard{
 	public RemoteLeaderboard(String ip){
 		try {
 		    Registry registry = LocateRegistry.getRegistry(ip);
-		    this.server = (LeaderboardServer) registry.lookup("Server");
+		    this.server = (LeaderboardServer) registry.lookup("LeaderboardServer");
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
