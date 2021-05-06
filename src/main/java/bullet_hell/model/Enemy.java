@@ -1,6 +1,6 @@
 package bullet_hell.model;
 
-public class Enemy{
+public class Enemy extends GameObject{
     
 	public Enemy(){
     	
