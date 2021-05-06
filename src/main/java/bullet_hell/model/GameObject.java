@@ -1,43 +1,66 @@
 package bullet_hell.model;
 
-import javafx.geometry.*;
-import javafx.scene.*;
-
-
 public class GameObject {
 	
-	private Node view;
-	private Point2D vec = new Point2D(0,0);//Velocity
+	public enum Shape{
+		CIRCLE,
+		TRIANGLE,
+		SQUARE,
+		PENTAGON,
+		HEXAGON;
+	}
+	public double size;
+	
+	private double x;
+	private double y;
+	private double dx;
+	private double dy;
+
 	private boolean alive = true;
 	
-	public GameObject(Node v) {
-		this.view =v;
+	public GameObject(Shape shape, double size) {
+		this.shape = shape;
+		this.size = size;
+		this.x = 0;
+		this.y = 0;
+		this.dx = 0;
+		this.dy = 0;
+	}
+
+	public GameObject(Shape shape, double size, double x, double y){
+		this.x = x;
+		this.y = y;
+		this.dx = 0;
+		this.dy = 0;
+	}
+
+	public GameObject(Shape shape, double size, double x, double y, double dx, double dy){
+		this.x = x;
+		this.y = y;
+		this.dx = dx;
+		this.dy = dy;
 	}
 	
 	//Updates players position	
-	public void update() {
-		view.setTranslateX(view.getTranslateX() + vec.getX());
-   
-		view.setTranslateY(view.getTranslateY() + vec.getY());
-	    
+	public void move() {
+		this.x += this.dx;
+		this.y += this.dy;
 	}
 
 	//Setters and getters
-	public void setVelocity(Point2D velocity) {  
-		this.vec = velocity;
+	public void setVelocity(double dx, double dy) {  
+		this.dx = dx;
+		this.dy = dy;
 	}
 
 		   
-	public Point2D getVelocity() {
-		return vec;	
+	public double[] getVelocity() {
+		double[] velocity = new double[2];
+		velocity[0] = this.dx;
+		velocity[1] = this.dy;
+		return velocity;	
 	}
 	
-		    
-	public Node getView() {        
-		return view;	   
-	}
-	
-		    
 	public boolean isAlive() {     
 		return alive;	    
 	}
@@ -51,17 +74,4 @@ public class GameObject {
 	public void setAlive(boolean alive) {     
 		this.alive = alive;  
 	}
-	
-	/*
-	 * Checks if object has been hit
-	 * 
-	 * @param
-	 * GameObject hit
-	 * 
-	 * @return
-	 * getView().getBoundsInParent().intersects(hit.getView().getBoundsInParent());
-	 */
-	public boolean isColliding(GameObject hit) {
-		return getView().getBoundsInParent().intersects(hit.getView().getBoundsInParent());	    
-	}	
 }

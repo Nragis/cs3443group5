@@ -15,100 +15,87 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+import bullet_hell.model.Button;
+import bullet_hell.model.Game;
 import bullet_hell.model.GameObject;
 import bullet_hell.model.Player;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
  */
-public class GameController extends Application {
+public class GameController {
 
-    //private static Stage null;
+	@FXML Canvass gameCanvass;
 
 	private Pane root;
+	
+	private Game gameEngine;
+	private HashMap<Button, boolean> buttonPresses;
 
-    private List<GameObject> bullets = new ArrayList<>();
-    private List<GameObject> enemies = new ArrayList<>();
+    private void onUpdate() {
+		ArrayList<Button> buttons = new ArrayList<>();;
+		if(this.buttonsPressed(Button.SPACE))
+			buttons.add(Button.SPACE);
+		if(this.buttonsPressed(Button.LEFT))
+			buttons.add(Button.LEFT);
+		if(this.buttonsPressed(Button.RIGHT))
+			buttons.add(Button.RIGHT);
+		if(this.buttonsPressed(Button.UP))
+			buttons.add(Button.UP);
+		if(this.buttonsPressed(Button.DOWN))
+			buttons.add(Button.DOWN);
 
-    private GameObject player;
+		this.gameEngine.update(buttons);
 
-    private Parent createContent() {
-        root = new Pane();
-        root.setPrefSize(600, 600);
+		paintGame();
 
-        player = new Player();
-        player.setVelocity(new Point2D(1, 0));
-        addGameObject(player, 300, 300);
+		this.buttonPresses.put(Button.SPACE, false);
+		this.buttonPresses.put(Button.LEFT, false);
+		this.buttonPresses.put(Button.RIGHT, false);
+		this.buttonPresses.put(Button.UP, false);
+		this.buttonPresses.put(Button.DOWN, false);
+    }
 
-        AnimationTimer timer = new AnimationTimer() {
+	public void paintGame(){
+		
+	}
+
+	public void initialize(){
+		// Initialize Game
+		this.gameEngine = new Game();
+
+		// Initialize button presses
+		this.buttonPresses.put(Button.SPACE, false);
+		this.buttonPresses.put(Button.LEFT, false);
+		this.buttonPresses.put(Button.RIGHT, false);
+		this.buttonPresses.put(Button.UP, false);
+		this.buttonPresses.put(Button.DOWN, false);
+
+		this.root.setOnKeyPressed(e -> {
+			if (e.getCode() == KeyCode.SPACE) {
+				this.buttonPresses.put(BUTTON.SPACE, true);
+			}
+			if (e.getCode() == KeyCode.LEFT) {
+				this.buttonPresses.put(BUTTON.LEFT, true);
+			}
+			if (e.getCode() == KeyCode.RIGHT) {
+				this.buttonPresses.put(BUTTON.RIGHT, true);
+			}
+			if (e.getCode() == KeyCode.UP) {
+				this.buttonPresses.put(BUTTON.UP, true);
+			}
+			if (e.getCode() == KeyCode.DOWN) {
+				this.buttonPresses.put(BUTTON.DOWN, true);
+			}
+		});
+		
+		// Start animation timer
+		AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 onUpdate();
             }
         };
         timer.start();
-
-        return root;
-    }
-
-    private void addBullet(GameObject bullet, double x, double y) {
-        bullets.add(bullet);
-        addGameObject(bullet, x, y);
-    }
-
-    private void addEnemy(GameObject enemy, double x, double y) {
-        enemies.add(enemy);
-        addGameObject(enemy, x, y);
-    }
-
-    private void addGameObject(GameObject object, double x, double y) {
-        object.getView().setTranslateX(x);
-        object.getView().setTranslateY(y);
-        root.getChildren().add(object.getView());
-    }
-
-    private void onUpdate() {
-        for (GameObject bullet : bullets) {
-            for (GameObject enemy : enemies) {
-                if (bullet.isColliding(enemy)) {
-                    bullet.setAlive(false);
-                    enemy.setAlive(false);
-
-                    root.getChildren().removeAll(bullet.getView(), enemy.getView());
-                }
-            }
-        }
-
-        bullets.removeIf(GameObject::isDead);
-        enemies.removeIf(GameObject::isDead);
-
-        bullets.forEach(GameObject::update);
-        enemies.forEach(GameObject::update);
-
-        player.update();
-
-        if (Math.random() < 0.02) {
-            addEnemy(new Enemy(), Math.random() * root.getPrefWidth(), Math.random() * root.getPrefHeight());
-        }
-    }
-
-
-    private static class Enemy extends GameObject {
-        Enemy() {
-            super(new Circle(15, 15, 15, Color.RED));
-        }
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(createContent()));
-        stage.getScene().setOnKeyPressed(e -> {
-            
-        });
-        stage.show();
-    }
-    
-    public void starting() {
-    	launch();
-    }
+	}
 }

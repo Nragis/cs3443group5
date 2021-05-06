@@ -1,5 +1,7 @@
 package bullet_hell.model;
 
+import java.util.ArrayList;
+
 public class Game{
 
 	Player player;
@@ -12,13 +14,7 @@ public class Game{
 		this.enemies = new ArrayList<>();
     }
 	
-	public enum Button{
-		SPACE,
-		LEFT,
-		RIGHT,
-		UP,
-		DOWN;
-	}
+	
 
 	public void update(ArrayList<Button> buttons){
 		// Move player
