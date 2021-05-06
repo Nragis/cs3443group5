@@ -1,38 +1,45 @@
 package bullet_hell.controller;
 
 import java.io.IOException;
-import javafx.fxml.*;
-import javafx.scene.*;
-import javafx.scene.control.*;
-import javafx.stage.*;
-import javafx.application.Application;
-import javafx.event.*;
 
-public class MainMenuController{
-	
-    @FXML private Button startGameButton;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
-    @FXML private Button statisticsButton;
+public class MainMenuController {
 
-    @FXML private Button optionsButton;
+    @FXML
+    private Button startGameButton;
 
-    @FXML private Button quitButton;
-    
-    private GameController Game;
+    @FXML
+    private Button statisticsButton;
 
-	private Stage stage;
-        
-    /*
-     * Loads game canvas once new game button is pressed
-     * Initializes and object of gameController
-     */
-    @FXML void startGameButtonPressed(ActionEvent event) throws Exception {
-        
-    	
-    	stage = null;
-    	Game = new GameController();
-    	Game.starting();
-    	
+    @FXML
+    private Button leaderboardButton;
+
+    @FXML
+    private Button quitButton;
+
+    @FXML
+    void startGameButtonPressed(ActionEvent event) {
+        try{
+            Stage stage = (Stage) startGameButton.getScene().getWindow();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/GameCanvass.fxml"));
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setTitle("Space Shooter");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch( IOException e ){
+            e.printStackTrace();
+        }
     }
 
     @FXML void statisticsButtonPressed(ActionEvent event) {
@@ -52,15 +59,17 @@ public class MainMenuController{
         }
     }
 
-    @FXML void optionsButtonPressed(ActionEvent event) {
+  @FXML
+    void leaderboardButtonPressed(ActionEvent event) {
+
         try{
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/OptionsMenu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/LeaderboardMenu.fxml"));
 
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            stage.setTitle("Space Shooter Options");
+            stage.setTitle("Space Shooter Leaderboard");
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
