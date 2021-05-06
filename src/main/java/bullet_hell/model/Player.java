@@ -25,6 +25,7 @@ public class Player extends GameObject {
 		playerShots = 0;
 		playerLifes = 5;
 		upgrade = 0;
+		//setTranslateX(300);
 	}
 		
 	public void shot() {
@@ -38,8 +39,8 @@ public class Player extends GameObject {
 	public void enemyKilled(){
 		playerScore += 1000;
 	}
-	 /*
-	void moveLeft() {
+	 
+	/*void moveLeft() {
         setTranslateX(getTranslateX() - 5);
     }
 

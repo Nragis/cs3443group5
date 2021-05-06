@@ -2,6 +2,7 @@ package bullet_hell.controller;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,16 +13,18 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bullet_hell.model.Bullet;
 import bullet_hell.model.GameObject;
 import bullet_hell.model.Player;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
  */
-public class GameController extends Application {
+public class GameController {
 
     //private static Stage null;
 
@@ -32,10 +35,10 @@ public class GameController extends Application {
 
     private GameObject player;
 
-    private Parent createContent() {
-        root = new Pane();
-        root.setPrefSize(600, 600);
-
+    private Parent createContent() throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/GameCanvass.fxml"));
+    	root = loader.load();
+        
         player = new Player();
         player.setVelocity(new Point2D(1, 0));
         addGameObject(player, 300, 300);
@@ -87,9 +90,9 @@ public class GameController extends Application {
 
         player.update();
 
-        if (Math.random() < 0.02) {
+        /*if (Math.random() < 0.02) {
             addEnemy(new Enemy(), Math.random() * root.getPrefWidth(), Math.random() * root.getPrefHeight());
-        }
+        }*/
     }
 
 
@@ -99,16 +102,17 @@ public class GameController extends Application {
         }
     }
 
-    @Override
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(createContent()));
         stage.getScene().setOnKeyPressed(e -> {
-            
-        });
+           	
+            Bullet bullet = new Bullet();
+            bullet.setVelocity(player.getVelocity().normalize().multiply(5));
+            addBullet(bullet, player.getView().getTranslateX(), player.getView().getTranslateY());
+        }); 
+        
+        //wait(5); 
+        
         stage.show();
-    }
-    
-    public void starting() {
-    	launch();
     }
 }
