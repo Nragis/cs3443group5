@@ -42,8 +42,7 @@ public class MainMenuController {
         }
     }
 
-    @FXML
-    void statisticsButtonPressed(ActionEvent event) {
+    @FXML void statisticsButtonPressed(ActionEvent event) {
         try{
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             
@@ -60,8 +59,9 @@ public class MainMenuController {
         }
     }
 
-    @FXML
+  @FXML
     void leaderboardButtonPressed(ActionEvent event) {
+
         try{
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             
@@ -78,14 +78,8 @@ public class MainMenuController {
         }
     }
 
-    @FXML
-    void quitButtonPressed(ActionEvent event) {
+    @FXML void quitButtonPressed(ActionEvent event) {
         Stage stage = (Stage) quitButton.getScene().getWindow();
         stage.close();
     }
-
-    public void initialize(){
-
-    }
-
 }

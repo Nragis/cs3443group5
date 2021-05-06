@@ -2,18 +2,12 @@ package bullet_hell.controller;
 
 import java.io.File;
 import java.io.IOException;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.Parent;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.stage.*;
+import javafx.event.*;
 
 import bullet_hell.model.Statistics;
 
@@ -31,8 +25,7 @@ public class StatisticsMenuController {
 
 	private Statistics stats;
 
-    @FXML
-    void backButtonPressed(ActionEvent event) {
+    @FXML void backButtonPressed(ActionEvent event) {
         try{
             Stage stage = (Stage) backButton.getScene().getWindow();
             

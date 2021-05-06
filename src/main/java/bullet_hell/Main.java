@@ -2,13 +2,12 @@ package bullet_hell;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.stage.Stage;                                                                                                                                                                                                                                                                                                                                                                                                   
  
 public class Main extends Application{
-    @Override
-    public void start(Stage stage) throws Exception{
+	
+    @Override public void start(Stage stage) throws Exception{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/MainMenu.fxml"));
             Parent root = loader.load();
@@ -27,4 +26,3 @@ public class Main extends Application{
         launch(args);
     }
 }
-
