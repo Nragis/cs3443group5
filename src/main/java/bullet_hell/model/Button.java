@@ -7,7 +7,7 @@ public enum Button{
 	UP(8),
 	DOWN(16);
 	
-	public this.value;
+	public int value;
 
 	public Button(int value){
 		this.value = value;
