@@ -5,9 +5,10 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
+import javafx.application.Application;
 import javafx.event.*;
 
-public class MainMenuController {
+public class MainMenuController{
 	
     @FXML private Button startGameButton;
 
@@ -18,19 +19,20 @@ public class MainMenuController {
     @FXML private Button quitButton;
     
     private GameController Game;
+
+	private Stage stage;
         
     /*
      * Loads game canvas once new game button is pressed
      * Initializes and object of gameController
      */
-    @FXML void startGameButtonPressed(ActionEvent event) {
-             	
-    	Game = new GameController();		
+    @FXML void startGameButtonPressed(ActionEvent event) throws Exception {
         
-    	Stage stage = (Stage) startGameButton.getScene().getWindow();
-      
-        Game.start(stage);
-
+    	
+    	stage = null;
+    	Game = new GameController();
+    	Game.starting();
+    	
     }
 
     @FXML void statisticsButtonPressed(ActionEvent event) {
@@ -71,5 +73,4 @@ public class MainMenuController {
         Stage stage = (Stage) quitButton.getScene().getWindow();
         stage.close();
     }
-
 }

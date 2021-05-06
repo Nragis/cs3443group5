@@ -1,9 +1,12 @@
 package bullet_hell.model;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
 /*
  * Stores Players current game info
  */
-public class Player{
+public class Player extends GameObject {
 	
 	private String playerName;
 	private int playerScore;
@@ -17,55 +20,38 @@ public class Player{
 	 * Initializes player info
 	 */
 	public Player() {
-		
+		super(new Rectangle(40, 20, Color.BLUE));
 		playerScore = 0;
 		playerShots = 0;
 		playerLifes = 5;
 		upgrade = 0;
 	}
-	
+		
 	public void shot() {
 		++playerShots;
 	}
 	
-	//Getters and Setters
-	public String getPlayerName() {
-		return playerName;
+	public void playerHit() {
+		--playerLifes; 
 	}
 	
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
+	public void enemyKilled(){
+		playerScore += 1000;
 	}
-	
-	public int getPlayerScore() {
-		return playerScore;
-	}
-	
-	public void setPlayerScore(int playerScore) {
-		this.playerScore = playerScore;
-	}
-	
-	public int getPlayerShots() {
-		return playerShots;
-	}
-	
-	public void setPlayerShots(int playerShots) {
-		this.playerShots = playerShots;
-	}
+	 /*
+	void moveLeft() {
+        setTranslateX(getTranslateX() - 5);
+    }
 
-	public int getPlayerLifes() {
-		return playerLifes;
-	}
+    void moveRight() {
+        setTranslateX(getTranslateX() + 5);
+    }
 
-	public void setPlayerLifes(int playerLifes) {
-		this.playerLifes = playerLifes;
-	}
+    void moveUp() {
+        setTranslateY(getTranslateY() - 5);
+    }
 
-	public int getUpgrade() {
-		return upgrade;
-	}
-
-	public void setUpgrade(int upgrade) {
-		this.upgrade = upgrade;
-	}
+    void moveDown() {
+        setTranslateY(getTranslateY() + 5);
+    }*/
 }
