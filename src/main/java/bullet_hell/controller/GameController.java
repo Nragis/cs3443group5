@@ -9,13 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -25,14 +25,18 @@ import java.util.List;
 import bullet_hell.model.*;
 
 /**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
  */
 public class GameController {
 
-	@FXML Pane basePane;
-	@FXML Canvas gameCanvas;
+	@FXML private Pane basePane;
+	@FXML private Canvas gameCanvas;
+    @FXML private Label livesLabel;
+    @FXML private Label scoreLabel;
+    @FXML private Label stageLabel;
 	
+	private AnimationTimer timer;
 	private Game gameEngine;
+	private boolean readyToRender;
 	private HashMap<Button, Boolean> buttonsPressed;
     
     private void update() {
@@ -52,18 +56,81 @@ public class GameController {
 
 		GraphicsContext gc = this.gameCanvas.getGraphicsContext2D();
 		paintGame(gc);
+		updateText();
 		
-
-		if(this.buttonsPressed.get(Button.SPACE)){
-			drawShapes(gc);		
-		}else{
-			gc.clearRect(0, 0, this.gameCanvas.getWidth(), this.gameCanvas.getHeight());
-		}
-
+		this.readyToRender = true;
     }
 
-	public void paintGame(gc){
-		
+	public void updateText(){
+		this.livesLabel.setText("Lives: " + Integer.toString( this.gameEngine.getPlayer().getLives() ) );
+		//this.scoreLabel.setText("Score: " + Integer.toString( this.gameEngine.getScore() ));
+		this.scoreLabel.setText("Score: 0" );
+		//this.scoreLabel.setText("Score: " + Integer.toString( this.gameEngine.getScore() ));
+		this.stageLabel.setText("Stage: " + Integer.toString( this.gameEngine.getStage() ));
+	}
+
+	public void paintGame(GraphicsContext gc){
+		// Clear Screen
+		gc.clearRect(0, 0, this.gameCanvas.getWidth(), this.gameCanvas.getHeight());
+
+		// Paint red line
+		gc.setStroke(Color.RED);
+		gc.setLineWidth(3);
+		gc.strokeLine(this.gameEngine.getBarrierX(),0,this.gameEngine.getBarrierX(), this.gameCanvas.getHeight());
+
+		// Paint player
+
+		gc.setLineWidth(2);
+		gc.setFill(Color.GREEN);
+        gc.setStroke(Color.BLUE);
+
+		Player player = this.gameEngine.getPlayer();
+				
+        gc.fillPolygon(player.computeXPoints(), player.computeYPoints(), player.getShape().numSides);
+        gc.strokePolygon(player.computeXPoints(), player.computeYPoints(), player.getShape().numSides);
+
+        /*gc.fillPolygon(new double[]
+				{x + size * (xOffset[0] * Math.cos(0) - yOffset[0] * Math.sin(0)),
+				x + size * (xOffset[1] * Math.cos(120) - yOffset[1] * Math.sin(120)), 
+				x + size * (xOffset[2] * Math.cos(240) - yOffset[2] * Math.sin(240))},
+            new double[]
+				{y + size * (xOffset[0] * Math.sin(0) + yOffset[0] * Math.cos(0)), 
+				y + size * (xOffset[1] * Math.sin(120) + yOffset[1] * Math.cos(120)), 
+				y + size * (xOffset[2] * Math.sin(240) + yOffset[2] * Math.cos(240))}, 
+			3);*/
+
+		// Paint enemies
+		for(Enemy e : this.gameEngine.getEnemies()){
+			gc.setFill(Color.RED);
+			gc.setStroke(Color.WHITE);
+			
+			gc.fillPolygon(e.computeXPoints(), e.computeYPoints(), e.getShape().numSides);
+			gc.strokePolygon(e.computeXPoints(), e.computeYPoints(), e.getShape().numSides);
+		}
+
+		// Paint bullets
+		for(Bullet b : this.gameEngine.getBullets()){
+			if(b.isFriendly()){
+				gc.setFill(Color.BLUE);
+				gc.setStroke(Color.GREEN);
+			}else{
+				gc.setFill(Color.WHITE);
+				gc.setStroke(Color.RED);
+			}
+
+			double radius = b.getSize();
+			double xCorner = b.getX() - radius;
+			double yCorner = b.getY() - radius;
+
+			gc.fillOval(xCorner, yCorner, 2 * radius, 2 * radius);
+			gc.strokeOval(xCorner, yCorner, 2 * radius, 2 * radius);
+
+		}
+	}
+
+	public void gameOver(){
+		this.timer.stop();
+
 	}
 
 	public void initialize(){
@@ -128,12 +195,18 @@ public class GameController {
 
 				
 		// Start animation timer
-		AnimationTimer timer = new AnimationTimer() {
+		this.timer = new AnimationTimer() {
+			private long lastUpdate = 0;
             @Override
             public void handle(long now) {
-                update();
+				if(readyToRender && now - lastUpdate >= 3.33e+7){
+					readyToRender = false;
+					update();
+					lastUpdate = now;
+				}
             }
         };
-        timer.start();
+        this.timer.start();
+		this.readyToRender = true;
 	}
 }
