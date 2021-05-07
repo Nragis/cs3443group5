@@ -1,8 +1,15 @@
 package bullet_hell.model;
 
-public class Enemy{
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
+public class Enemy extends GameObject {
     
-	public Enemy(){
-    	
+	private int ennmiesLife;
+	
+    public Enemy() {
+          
+    	super(new Circle(15, 15, 15, Color.RED));
+    	ennmiesLife = 5;
     }
 }

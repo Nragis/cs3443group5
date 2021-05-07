@@ -3,7 +3,7 @@ package bullet_hell.model;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/*
+/**
  * Stores Players current game info
  */
 public class Player extends GameObject {
@@ -12,7 +12,7 @@ public class Player extends GameObject {
 	private int playerScore;
 	private int playerShots;
 	private int playerLifes;
-	private int upgrade;
+	private int enemiesKilled;
 	
 	
 	/*
@@ -24,35 +24,58 @@ public class Player extends GameObject {
 		playerScore = 0;
 		playerShots = 0;
 		playerLifes = 5;
-		upgrade = 0;
-		//setTranslateX(300);
+		enemiesKilled = 0;
 	}
-		
-	public void shot() {
-		++playerShots;
+
+	
+	//Getters and Setters
+	public String getPlayerName() {
+		return playerName;
+	}
+
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+
+	public int getPlayerScore() {
+		return playerScore;
+	}
+
+
+	public void setPlayerScore(int playerScore) {
+		this.playerScore = playerScore;
+	}
+
+
+	public int getPlayerShots() {
+		return playerShots;
+	}
+
+
+	public void setPlayerShots(int playerShots) {
+		this.playerShots = playerShots;
+	}
+
+
+	public int getPlayerLifes() {
+		return playerLifes;
+	}
+
+
+	public void setPlayerLifes(int playerLifes) {
+		this.playerLifes = playerLifes;
+	}
+
+	public int getEnemiesKilled() {
+		return enemiesKilled;
+	}
+
+
+	public void setEnemiesKilled(int enemiesKilled) {
+		this.enemiesKilled = enemiesKilled;
 	}
 	
-	public void playerHit() {
-		--playerLifes; 
-	}
 	
-	public void enemyKilled(){
-		playerScore += 1000;
-	}
-	 
-	/*void moveLeft() {
-        setTranslateX(getTranslateX() - 5);
-    }
-
-    void moveRight() {
-        setTranslateX(getTranslateX() + 5);
-    }
-
-    void moveUp() {
-        setTranslateY(getTranslateY() - 5);
-    }
-
-    void moveDown() {
-        setTranslateY(getTranslateY() + 5);
-    }*/
 }
