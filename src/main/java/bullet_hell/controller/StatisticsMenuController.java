@@ -1,68 +1,31 @@
 package bullet_hell.controller;
 
+import java.io.File;
 import java.io.IOException;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.stage.*;
+import javafx.event.*;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.Parent;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
+import bullet_hell.model.Statistics;
 
 public class StatisticsMenuController {
 
-    @FXML
-    private Button backButton;
+    @FXML private Button backButton;
 
-    @FXML
-    private Label highScoreName1;
+    @FXML private Label attemptsLabel;
 
-    @FXML
-    private Label highScoreNumber1;
+    @FXML private Label timePlayedLabel;
 
-    @FXML
-    private Label highScoreName2;
+    @FXML private Label bulletsFiredLabel;
 
-    @FXML
-    private Label highScoreName3;
+    @FXML private Label stagesCompletedLabel;
 
-    @FXML
-    private Label highScoreName4;
+	private Statistics stats;
 
-    @FXML
-    private Label highScoreName5;
-
-    @FXML
-    private Label highScoreNumber2;
-
-    @FXML
-    private Label highScoreNumber3;
-
-    @FXML
-    private Label highScoreNumber4;
-
-    @FXML
-    private Label highScoreNumber5;
-
-    @FXML
-    private Label attemptsLabel;
-
-    @FXML
-    private Label timePlayedLabel;
-
-    @FXML
-    private Label bulletsFiredLabel;
-
-    @FXML
-    private Label stagesCompletedLabel;
-
-    @FXML
-    void backButtonPressed(ActionEvent event) {
+    @FXML void backButtonPressed(ActionEvent event) {
         try{
             Stage stage = (Stage) backButton.getScene().getWindow();
             
@@ -80,6 +43,16 @@ public class StatisticsMenuController {
     }
     
     public void initialize(){
+		File f = new File("statistics.json");
+		if( f.exists() ){
+			this.stats = Statistics.fromJson("statistics.json");
+		} else {
+			this.stats = new Statistics();
+		}
 
+		this.attemptsLabel.setText("Attempts: " + Integer.toString(this.stats.getAttempts()));
+		this.timePlayedLabel.setText("Time Played: " + Integer.toString(this.stats.getTimePlayed()));
+		this.bulletsFiredLabel.setText("Bullets Fired: " + Integer.toString(this.stats.getBulletsFired()));
+		this.stagesCompletedLabel.setText("Stages Completed: " + Integer.toString(this.stats.getStagesCompleted()));
     }
 }

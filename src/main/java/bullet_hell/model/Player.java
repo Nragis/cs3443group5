@@ -1,34 +1,57 @@
 package bullet_hell.model;
 
-public class Player{
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+/*
+ * Stores Players current game info
+ */
+public class Player extends GameObject {
 	
 	private String playerName;
 	private int playerScore;
 	private int playerShots;
-	//private int player
+	private int playerLifes;
+	private int upgrade;
 	
-	//Getters and Setters
-	public String getPlayerName() {
-		return playerName;
+	
+	/*
+	 * Constructor
+	 * Initializes player info
+	 */
+	public Player() {
+		super(new Rectangle(40, 20, Color.BLUE));
+		playerScore = 0;
+		playerShots = 0;
+		playerLifes = 5;
+		upgrade = 0;
+	}
+		
+	public void shot() {
+		++playerShots;
 	}
 	
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
+	public void playerHit() {
+		--playerLifes; 
 	}
 	
-	public int getPlayerScore() {
-		return playerScore;
+	public void enemyKilled(){
+		playerScore += 1000;
 	}
-	
-	public void setPlayerScore(int playerScore) {
-		this.playerScore = playerScore;
-	}
-	
-	public int getPlayerShots() {
-		return playerShots;
-	}
-	
-	public void setPlayerShots(int playerShots) {
-		this.playerShots = playerShots;
-	}
+	 /*
+	void moveLeft() {
+        setTranslateX(getTranslateX() - 5);
+    }
+
+    void moveRight() {
+        setTranslateX(getTranslateX() + 5);
+    }
+
+    void moveUp() {
+        setTranslateY(getTranslateY() - 5);
+    }
+
+    void moveDown() {
+        setTranslateY(getTranslateY() + 5);
+    }*/
 }

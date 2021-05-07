@@ -29,7 +29,7 @@
       </Label>
       <Button fx:id="startGameButton" mnemonicParsing="false" onAction="#startGameButtonPressed" styleClass="mainMenu-button" text="Start Game" GridPane.rowIndex="3" />
       <Button fx:id="statisticsButton" mnemonicParsing="false" onAction="#statisticsButtonPressed" styleClass="mainMenu-button" text="Statistics" GridPane.rowIndex="4" />
-      <Button fx:id="optionsButton" mnemonicParsing="false" onAction="#optionsButtonPressed" styleClass="mainMenu-button" text="Options" GridPane.rowIndex="5" />
+      <Button fx:id="leaderboardButton" mnemonicParsing="false" onAction="#leaderboardButtonPressed" styleClass="mainMenu-button" text="Leaderboard" GridPane.rowIndex="5" />
       <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitButtonPressed" styleClass="mainMenu-button" text="Quit" GridPane.rowIndex="6" />
    </children>
 </GridPane>
