@@ -20,3 +20,4 @@ We decided on the Google Java Coding Style for some consistency with the project
 - David Jackson
 - Quinn Murphey
 - Alec Layton
+- Caleb Rife
