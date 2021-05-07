@@ -10,8 +10,10 @@ public class GameObject {
 	private Point2D vec = new Point2D(0,0);//Velocity
 	private boolean alive = true;
 	
+	
 	public GameObject(Node v) {
-		this.view =v;
+		this.view = v;
+		//life = 5;
 	}
 	
 	//Updates players position	
@@ -46,11 +48,10 @@ public class GameObject {
 	public boolean isDead() {       
 		return !alive;    
 	}
-	
 		    
 	public void setAlive(boolean alive) {     
 		this.alive = alive;  
-	}
+	}	
 	
 	/*
 	 * Checks if object has been hit
@@ -63,5 +64,5 @@ public class GameObject {
 	 */
 	public boolean isColliding(GameObject hit) {
 		return getView().getBoundsInParent().intersects(hit.getView().getBoundsInParent());	    
-	}	
+	}
 }

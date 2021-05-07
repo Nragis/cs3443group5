@@ -7,8 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,38 +21,51 @@ import bullet_hell.model.*;
 public class GameController {
 
 	private Pane root;
-    private GameObject player;
+    private Player player;
     private AnimationTimer timer;
-	private List<GameObject> bullets = new ArrayList<>();
-    private List<GameObject> enemies = new ArrayList<>();
+	private List<Bullet> bullets = new ArrayList<>();
+    private List<Enemy> enemies = new ArrayList<>();
     private boolean pause;
     private Game game;
 
-
     /*
      * Updates all objects on the screen
+     * Checks for game over
      */
     public void onUpdate() {
-        for (GameObject bullet : bullets) {
-            for (GameObject enemy : enemies) {
+        for (Bullet bullet : bullets) {
+            for (Enemy enemy : enemies) {
                 if (bullet.isColliding(enemy)) {
-                    bullet.setAlive(false);
-                    enemy.setAlive(false);
+                    if (game.enemykilled(enemy)) {
+                    	bullet.setAlive(false);
+                    	enemy.setAlive(false);
+                    	game.enemyKilled(player);
 
-                    root.getChildren().removeAll(bullet.getView(), enemy.getView());
-                }
+                    	root.getChildren().removeAll(bullet.getView(), enemy.getView());
+                    } else {
+                    	game.enemyHit(enemy);
+                    }
+                    
+                    if (player.isColliding(enemy)) {
+                    	game.playerHit(player);
+                    	if (player.getLife() == 0) {
+                        	
+                        	GameOver();
+                        }   
+                    }   
+                }   
             }
         }
-
+        
         bullets.removeIf(GameObject::isDead);
         enemies.removeIf(GameObject::isDead);
-
         bullets.forEach(GameObject::update);
         enemies.forEach(GameObject::update);
 
         player.update();
-
-        /*if (Math.random() < 0.02) {
+        	
+        /*
+        if (Math.random() < 0.02) {
             addEnemy(new Enemy(), Math.random() * root.getPrefWidth(), Math.random() * root.getPrefHeight());
             
         }*/
@@ -68,7 +79,7 @@ public class GameController {
 	 *  double x
 	 *  double y
 	 */
-	public void addBullet(GameObject bullet, double x, double y) {
+	public void addBullet(Bullet bullet, double x, double y) {
         bullets.add(bullet);
         addGameObject(bullet, x, y);
     }
@@ -81,7 +92,7 @@ public class GameController {
 	 *  double x
 	 *  double y
 	 */
-    public void addEnemy(GameObject enemy, double x, double y) {
+    public void addEnemy(Enemy enemy, double x, double y) {
         enemies.add(enemy);
         addGameObject(enemy, x, y);
     }
@@ -106,7 +117,7 @@ public class GameController {
         
     	game = new Game();
         player = new Player();
-        player.setVelocity(new Point2D(1, 0));
+        player.setVelocity(new Point2D(0, 0));
         addGameObject(player, 150, 300);
 
         timer = new AnimationTimer() {
@@ -116,7 +127,6 @@ public class GameController {
             }
         };
         timer.start();
-
         return root;
     }
 
@@ -125,8 +135,8 @@ public class GameController {
         stage.getScene().setOnKeyPressed(e -> {
            	
             //Bullet bullet = new Bullet();
-            //bullet.setVelocity(player.getVelocity().normalize().multiply(5));
-            //addBullet(bullet, player.getView().getTranslateX(), player.getView().getTranslateY());
+            //bullet.setVelocity(new Point2D(5, 0));
+            //addBullet(bullet, player.getView().getTranslateX() + 20, player.getView().getTranslateY());
         }); 
                 
         stage.show();
@@ -138,5 +148,10 @@ public class GameController {
     	} else {
     		timer.start();
     	}
+    }
+    
+    public void GameOver() {
+    	timer.stop();
+    	
     }
 }

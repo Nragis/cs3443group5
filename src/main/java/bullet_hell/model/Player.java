@@ -11,8 +11,8 @@ public class Player extends GameObject {
 	private String playerName;
 	private int playerScore;
 	private int playerShots;
-	private int playerLifes;
 	private int enemiesKilled;
+	private int life;
 	
 	
 	/*
@@ -23,8 +23,8 @@ public class Player extends GameObject {
 		super(new Rectangle(40, 20, Color.BLUE));
 		playerScore = 0;
 		playerShots = 0;
-		playerLifes = 5;
 		enemiesKilled = 0;
+		life = 0;
 	}
 
 	
@@ -58,16 +58,6 @@ public class Player extends GameObject {
 		this.playerShots = playerShots;
 	}
 
-
-	public int getPlayerLifes() {
-		return playerLifes;
-	}
-
-
-	public void setPlayerLifes(int playerLifes) {
-		this.playerLifes = playerLifes;
-	}
-
 	public int getEnemiesKilled() {
 		return enemiesKilled;
 	}
@@ -76,6 +66,11 @@ public class Player extends GameObject {
 	public void setEnemiesKilled(int enemiesKilled) {
 		this.enemiesKilled = enemiesKilled;
 	}
-	
-	
+	public int getLife() {
+		return life;
+	}
+
+	public void setLife(int life) {
+		this.life = life;
+	}
 }
