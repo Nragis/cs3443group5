@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Canvas fx:id="gameCanvass" height="300.0" width="400.0" />
+      <TextField layoutX="126.0" layoutY="138.0" />
+      <Label alignment="CENTER" layoutX="115.0" layoutY="103.0" prefHeight="21.0" prefWidth="171.0" text="What is your name?" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="286.0" layoutY="138.0" mnemonicParsing="false" text="Enter name" />
+   </children>
+</Pane>

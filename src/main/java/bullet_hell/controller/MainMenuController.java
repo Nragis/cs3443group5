@@ -27,8 +27,8 @@ public class MainMenuController {
     private GameController Game;
     private Stage stage;
 
- 
-    @FXML void startGameButtonPressed(ActionEvent event) throws Exception {
+    @FXML 
+    void startGameButtonPressed(ActionEvent event) throws Exception {
         
     	Game = new GameController();
     	Stage stage = (Stage) startGameButton.getScene().getWindow(); 
@@ -37,7 +37,8 @@ public class MainMenuController {
     	
     }
     
-    @FXML void statisticsButtonPressed(ActionEvent event) {
+    @FXML 
+    void statisticsButtonPressed(ActionEvent event) {
         try{
             Stage stage = (Stage) startGameButton.getScene().getWindow();
             
@@ -53,8 +54,8 @@ public class MainMenuController {
             e.printStackTrace();
         }
     }
-
-  @FXML
+  
+    @FXML
     void leaderboardButtonPressed(ActionEvent event) {
 
         try{

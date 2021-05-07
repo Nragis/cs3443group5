@@ -10,6 +10,7 @@ public class Enemy extends GameObject {
     public Enemy() {
           
     	super(new Circle(15, 15, 15, Color.RED));
+    	life = 5;
     }
     
 	public int getLife() {

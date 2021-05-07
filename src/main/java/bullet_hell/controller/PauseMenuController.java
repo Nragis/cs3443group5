@@ -58,7 +58,6 @@ public class PauseMenuController {
     
         // Save current game to statistics
         
-        
         stage.close();
     }
     

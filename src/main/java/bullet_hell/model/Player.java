@@ -24,7 +24,7 @@ public class Player extends GameObject {
 		playerScore = 0;
 		playerShots = 0;
 		enemiesKilled = 0;
-		life = 0;
+		life = 5;
 	}
 
 	
