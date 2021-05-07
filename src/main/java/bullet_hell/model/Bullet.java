@@ -1,11 +1,9 @@
 package bullet_hell.model;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 public class Bullet extends GameObject{
-
+	private static final double BULLET_SIZE = 2.0;
 	public Bullet() {
-		super(new Circle(5, 5, 5, Color.BROWN));
+		super(Shape.CIRCLE, BULLET_SIZE);
 	}
 }

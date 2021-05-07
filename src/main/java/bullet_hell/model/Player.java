@@ -8,11 +8,10 @@ import javafx.scene.shape.Rectangle;
  */
 public class Player extends GameObject {
 	
-	private String playerName;
-	private int playerScore;
-	private int playerShots;
-	private int playerLifes;
-	private int upgrade;
+	private static final double MOVE_SPEED = 4.0;
+	private static final double PLAYER_SIZE = 4.0;
+
+	private int lives;
 	
 	
 	/*
@@ -20,38 +19,33 @@ public class Player extends GameObject {
 	 * Initializes player info
 	 */
 	public Player() {
-		super(new Rectangle(40, 20, Color.BLUE));
-		playerScore = 0;
-		playerShots = 0;
-		playerLifes = 5;
-		upgrade = 0;
+		super(Shape.TRIANGLE, PLAYER_SIZE);
+		this.lives = 5;
 	}
 		
-	public void shot() {
-		++playerShots;
+	public void removeLife() {
+		--this.lives; 
 	}
-	
-	public void playerHit() {
-		--playerLifes; 
+
+	public void removeLife(int ammount) {
+		this.lives -= ammount;
 	}
-	
-	public void enemyKilled(){
-		playerScore += 1000;
-	}
-	 /*
-	void moveLeft() {
-        setTranslateX(getTranslateX() - 5);
+
+	public void move(){ }
+
+	public void moveLeft() {
+		this.addX(- MOVE_SPEED);
     }
 
-    void moveRight() {
-        setTranslateX(getTranslateX() + 5);
+    public void moveRight() {
+		this.addX(MOVE_SPEED);
     }
 
-    void moveUp() {
-        setTranslateY(getTranslateY() - 5);
+    public void moveUp() {
+		this.addY(- MOVE_SPEED);
     }
 
-    void moveDown() {
-        setTranslateY(getTranslateY() + 5);
-    }*/
+    public void moveDown() {
+		this.addY(MOVE_SPEED);
+    }
 }

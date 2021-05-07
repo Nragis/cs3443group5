@@ -18,19 +18,19 @@ public class Game{
 
 	public void update(ArrayList<Button> buttons){
 		// Move player
-		if( buttons.contains(SPACE) ){
+		if( buttons.contains(Button.SPACE) ){
 			// Shoot
 		}
-		if( buttons.contains(LEFT) ){
+		if( buttons.contains(Button.LEFT) ){
 			this.player.moveLeft();
 		}
-		if( buttons.contains(RIGHT) ){
+		if( buttons.contains(Button.RIGHT) ){
 			this.player.moveRight();
 		}
-		if( buttons.contains(UP) ){
+		if( buttons.contains(Button.UP) ){
 			this.player.moveUp();
 		}
-		if( buttons.contains(DOWN) ){
+		if( buttons.contains(Button.DOWN) ){
 			this.player.moveDown();
 		}
 		
@@ -75,7 +75,7 @@ public class Game{
 		return this.enemies;
 	}
 
-	public void setEnemies(ArrayList<Enemie> enemies){
+	public void setEnemies(ArrayList<Enemy> enemies){
 		this.enemies = enemies;
 	}
 

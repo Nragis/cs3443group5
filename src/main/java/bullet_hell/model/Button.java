@@ -9,7 +9,7 @@ public enum Button{
 	
 	public int value;
 
-	public Button(int value){
+	Button(int value){
 		this.value = value;
 	}
 }
