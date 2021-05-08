@@ -14,9 +14,10 @@ import bullet_hell.model.Leaderboard;
 
 public class LeaderboardServerImpl implements LeaderboardServer{
 	
+	private static Registry registry;
 	private Leaderboard leaderboard;
 
-	public LeaderboardServerImpl (){
+	public LeaderboardServerImpl () {
 		super();
 
 		File f = new File("leaderboard.json");
@@ -36,14 +37,14 @@ public class LeaderboardServerImpl implements LeaderboardServer{
 		this.leaderboard.toJson("leaderboard.json");
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
         try {
 			System.setProperty("java.rmi.server.hostname","nragis.com");
             String name = "LeaderboardServer";
             LeaderboardServer server = new LeaderboardServerImpl();
             LeaderboardServer stub =
                 (LeaderboardServer) UnicastRemoteObject.exportObject(server, 1056);
-            Registry registry = LocateRegistry.getRegistry();
+			registry = LocateRegistry.createRegistry(1099);
             registry.rebind(name, stub);
             System.out.println("Server bound");
         } catch (Exception e) {
