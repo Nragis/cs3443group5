@@ -69,7 +69,7 @@ public class EndGameController {
 		localLeaderboard.toJson("leaderboard.json");
 
 		try{
-			RemoteLeaderboard remoteLeaderboard = new RemoteLeaderboard("nraigs.com");
+			RemoteLeaderboard remoteLeaderboard = new RemoteLeaderboard("nragis.com");
 			remoteLeaderboard.addScore(this.nameTextField.getText(), this.score);
 		}catch (Exception e){
 			System.out.println("Remote leaderboard connection failed");
