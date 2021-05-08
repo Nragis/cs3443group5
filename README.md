@@ -6,7 +6,7 @@ This game was created using soley JavaFX and Java standard libaries. Those respo
 We decided on the Google Java Coding Style for some consistency with the project. We were all forced to collaborate on this game remotely due to COVID-19 and the wishes of everyone invovled with the project. This made it easy for us to work on our seperate pieces of the game at our own available times while keeping everyone on the same page.
 
 # Launch
-- Run the code from class Launcher.java
+- Run the code from src/main/java/bullet_hell/Launcher.java
 
 # Tech / Framework Used
 - JavaFX
