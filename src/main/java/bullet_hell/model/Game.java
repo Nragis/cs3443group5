@@ -59,10 +59,10 @@ public class Game{
 		// Create new enemies
 		if( random.nextInt() % (150 - this.stage*5) == 0 ){
 			Enemy newEnemy = Enemy.randomEnemy(this.stage);
-			double newX = (random.nextDouble() * (GAME_SIZE_X - BARRIER_X - newEnemy.getSize() * (newEnemy.getShape().maxXOffset - newEnemy.getShape().minXOffset)) 
-					+ BARRIER_X - newEnemy.getShape().maxXOffset);
-			double newY = (random.nextDouble() * (GAME_SIZE_Y - newEnemy.getSize() * (newEnemy.getShape().maxYOffset - newEnemy.getShape().minYOffset)) 
-					+ newEnemy.getShape().minYOffset);
+			double newX = (random.nextDouble() * (GAME_SIZE_X - BARRIER_X - 30) )
+					+ BARRIER_X + 15;
+			double newY = (random.nextDouble() * (GAME_SIZE_Y - 30) 
+					+ 15);
 			newEnemy.setX(newX);
 			newEnemy.setY(newY);
 			this.enemies.add(newEnemy);
@@ -142,7 +142,7 @@ public class Game{
 		this.timePlayed++;
 
 		if(timePlayed % 900 == 0){
-			this.player.setMoveSpeed(this.player.getMoveSpeed() + stage*2);
+			this.player.setMoveSpeed(this.player.getMoveSpeed() + 2);
 			this.stage++;
 			addScore(stage*200);
 		}

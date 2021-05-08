@@ -58,7 +58,7 @@ public class Enemy extends GameObject{
 		enemy.setRotation(random.nextDouble() * 360);
 		enemy.setSize(140.0 / (4 + stage));
 		enemy.setVelocity(new double[] {random.nextDouble() * (2*stage) - stage, random.nextDouble() * (2*stage) - stage});
-		enemy.getBullet().setVelocity(new double[] { - 3 * (random.nextDouble() * (stage)) + stage, 3 * ( random.nextDouble() * (2*stage) - stage ) + stage});
+		enemy.getBullet().setVelocity(new double[] { - Math.max(3 * (random.nextDouble() * (stage)) + stage, 8), 3 * ( random.nextDouble() * (2*stage) - stage )});
 		enemy.setFirerate(60-stage);
 		enemy.setLife(Math.max(1, (int) (0.25 * stage)));
 		return enemy;
