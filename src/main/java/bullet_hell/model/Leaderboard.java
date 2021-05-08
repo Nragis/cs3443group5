@@ -24,7 +24,7 @@ public class Leaderboard implements Serializable{
 		this.scores = new int[100];
 
 		for( int i = 0; i < 100; i++){
-			this.names[i] = "abcde";
+			this.names[i] = "AAA";
 			this.scores[i] = 0;
 		}
 	}
@@ -109,19 +109,22 @@ public class Leaderboard implements Serializable{
 	 * @param int score
 	 */
 	public void addScore(String name, int score){
-		int i;
-		for(i = 0; i < scores.length; i++){
+		int index = 0;
+		for(int i = 0; i < scores.length; i++){
 			if(this.scores[i] < score)
 				break;
+			index++;
 		}
+		if(index == this.scores.length)
+			return;
 
-		for(int j = scores.length - 2; j >= i; j++){
+		for(int j = scores.length - 2; j >= index; j--){
 			this.scores[j + 1] = this.scores[j];
 			this.names[j + 1] = this.names[j];
 		}
 
-		this.scores[i] = score;
-		this.names[i] = name;
+		this.scores[index] = score;
+		this.names[index] = name;
 	}
 	
 	/** Removes a score from the leaderboard based on index

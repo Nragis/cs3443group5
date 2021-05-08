@@ -1,6 +1,7 @@
 package bullet_hell.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -18,11 +19,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import bullet_hell.model.*;
+import bullet_hell.controller.EndGameController;
 
 /**
  */
@@ -59,13 +62,13 @@ public class GameController {
 		updateText();
 		
 		this.readyToRender = true;
+		if(this.gameEngine.getPlayer().getLives() <= 0)
+			gameOver();
     }
 
 	public void updateText(){
 		this.livesLabel.setText("Lives: " + Integer.toString( this.gameEngine.getPlayer().getLives() ) );
-		//this.scoreLabel.setText("Score: " + Integer.toString( this.gameEngine.getScore() ));
-		this.scoreLabel.setText("Score: 0" );
-		//this.scoreLabel.setText("Score: " + Integer.toString( this.gameEngine.getScore() ));
+		this.scoreLabel.setText("Score: " + Integer.toString( this.gameEngine.getScore() ));
 		this.stageLabel.setText("Stage: " + Integer.toString( this.gameEngine.getStage() ));
 	}
 
@@ -131,6 +134,24 @@ public class GameController {
 	public void gameOver(){
 		this.timer.stop();
 
+		try{
+            Stage stage = (Stage) this.gameCanvas.getScene().getWindow();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bullet_hell/view/EndGameMenu.fxml"));
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+			EndGameController controller = loader.getController();
+			controller.setStats(this.gameEngine.getScore(), this.gameEngine.getStage(), this.gameEngine.getBulletsFired(), this.gameEngine.getTimePlayed());
+
+            stage.setTitle("Space Shooter");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch( IOException e ){
+            e.printStackTrace();
+        }	
 	}
 
 	public void initialize(){

@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
  */
 public class Player extends GameObject {
 	
-	private static final double MOVE_SPEED = 7.0;
+	private static double moveSpeed = 7.0;
 	private static final double PLAYER_SIZE = 30.0;
 	private static final double[] BULLET_SPEED = {20.0, 0.0};
 	
@@ -47,19 +47,19 @@ public class Player extends GameObject {
 	public void move(){ }
 
 	public void moveLeft() {
-		this.addX(- MOVE_SPEED);
+		this.addX(- moveSpeed);
     }
 
     public void moveRight() {
-		this.addX(MOVE_SPEED);
+		this.addX(moveSpeed);
     }
 
     public void moveUp() {
-		this.addY(- MOVE_SPEED);
+		this.addY(- moveSpeed);
     }
 
     public void moveDown() {
-		this.addY(MOVE_SPEED);
+		this.addY(moveSpeed);
     }
 
 	public Bullet getBullet(){
@@ -89,8 +89,12 @@ public class Player extends GameObject {
 	public void decreaseShootTimer(){
 		if(this.shootTimer > 0) this.shootTimer--;
 	}
+	
+	public void setMoveSpeed(double moveSpeed){
+		this.moveSpeed = moveSpeed;
+	}
 
 	public double getMoveSpeed(){
-		return this.MOVE_SPEED;
+		return this.moveSpeed;
 	}
 }

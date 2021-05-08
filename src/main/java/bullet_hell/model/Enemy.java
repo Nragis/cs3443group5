@@ -43,7 +43,19 @@ public class Enemy extends GameObject{
 
 	public static Enemy randomEnemy(int stage){
 		Random random = new Random(System.nanoTime());
-		Enemy enemy = new Enemy(Shape.SQUARE, 10.0);
+		Enemy enemy;
+		if(stage < 5)
+			enemy = new Enemy(Shape.TRIANGLE, 140.0 / (4 + stage));
+		else if (stage < 10)
+			enemy = new Enemy(Shape.SQUARE, 140.0 / (4 + stage));
+		else if (stage < 15)
+			enemy = new Enemy(Shape.PENTAGON, 140.0 / (4 + stage));
+		else if (stage < 25)
+			enemy = new Enemy(Shape.HEXAGON, 140.0 / (4 + stage));
+		else
+			enemy = new Enemy(Shape.CIRCLE, 140.0 / (4 + stage));
+		
+		enemy.setRotation(random.nextDouble() * 360);
 		enemy.setSize(140.0 / (4 + stage));
 		enemy.setVelocity(new double[] {random.nextDouble() * (2*stage) - stage, random.nextDouble() * (2*stage) - stage});
 		enemy.getBullet().setVelocity(new double[] { -10 * (random.nextDouble() * (stage)), 10*( random.nextDouble() * (2*stage) - stage )});

@@ -93,51 +93,63 @@ public class Game{
 		// BULLETS
 
 		// Remove bullets when they hit a back wall. Bounce when they hit a top wall
-		// Collision detection
-		ArrayList<Bullet> newBullets = new ArrayList<>();
-		for(Bullet b : this.bullets){
-			
-
-			if( b.getX() >= 0 && b.getX() <= GAME_SIZE_X)
-			   newBullets.add(b);
-			if( b.getY() < 0 || b.getY() > GAME_SIZE_Y){
-				b.setYVelocity(-1 * b.getYVelocity());
-			}
-		}
-		// Replace bullets with newBullets
-		this.bullets = newBullets;
-
 		// Move and collide bullets
 		for(Bullet b : this.bullets){
 			b.move(); // Move
-			
 			// Collide
 			if( b.isFriendly() ){
 				for(Enemy e : this.enemies){
 					if(b.isCollidingWith(e)){
 						e.removeLife();
+						b.remove();
+						addScore(stage*100);
 					}	
 				}
 			}else{
 				if(b.isCollidingWith(this.player)){
 					this.player.removeLife();
+					b.remove();
 				}
 			}
 		}
-		
-		//Remove dead enemies
+
+		// Wall collision detection
+		for(Bullet b : this.bullets){
+			if( ! (b.getX() >= 0 && b.getX() <= GAME_SIZE_X))
+			   b.remove();
+			if( b.getY() < 0 || b.getY() > GAME_SIZE_Y){
+				b.setYVelocity(-1 * b.getYVelocity());
+			}
+		}
+		// Replace bullets with newBullets
+
+		ArrayList<Bullet> newBullets = new ArrayList<>();
+		for(Bullet b : this.bullets){
+			if(! b.isRemove())
+				newBullets.add(b);
+		}
+		this.bullets = newBullets;
+
+				//Remove dead enemies
 		ArrayList<Enemy> newEnemies = new ArrayList<>();
 		for(Enemy e : this.enemies){
-			System.out.println(Integer.toString(e.getLives()));
 			if(e.getLives() > 0)
 				newEnemies.add(e);
 		}
+
 		this.enemies = newEnemies;
 
 		this.timePlayed++;
 
-		if(timePlayed % 900 == 0)
+		if(timePlayed % 900 == 0){
+			this.player.setMoveSpeed(this.player.getMoveSpeed() + stage*2);
 			this.stage++;
+			addScore(stage*200);
+		}
+	}
+
+	public void addScore(int score){
+		this.score += score;
 	}
 
 	public void shoot(Player player){
@@ -218,6 +230,14 @@ public class Game{
 
 	public void setStage(int stage){
 		this.stage = stage;
+	}
+
+	public int getBulletsFired(){
+		return this.bulletsFired;
+	}
+
+	public int getTimePlayed(){
+		return this.timePlayed;
 	}
 
 	public int getBarrierX(){

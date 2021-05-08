@@ -1,5 +1,7 @@
 # The base for this .gitignore was gotten at https://gist.github.com/dedunumax/54e82214715e35439227
 
+leaderboard.json
+statistics.json
 *.pdf
 
 ##############################

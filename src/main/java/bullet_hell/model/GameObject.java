@@ -93,7 +93,7 @@ public class GameObject {
 		int objectSides = object.getShape().numSides;
 		
 		if(thisSides == 0 && objectSides == 0){
-			double distance = Math.sqrt( Math.pow((this.getX() - object.getX()), 2) + Math.pow((this.getY() - object.getY()), 2));
+			double distance =  Math.pow((this.getX() - object.getX()), 2) + Math.pow((this.getY() - object.getY()), 2);
 			if(distance <= this.getSize() + object.getSize())
 				return true;
 			else 
@@ -107,7 +107,7 @@ public class GameObject {
 			// Compile proj axis
 			double min = Integer.MAX_VALUE;
 			for(int i = 0; i < objectSides; i++){ // Find closes vert to circle
-				double distance = Math.sqrt( Math.pow((this.getX() - objectXPoints[i]), 2) + Math.pow((this.getY() - objectYPoints[i]), 2));
+				double distance =  Math.pow((this.getX() - objectXPoints[i]), 2) + Math.pow((this.getY() - objectYPoints[i]), 2);
 				if(distance < min){
 					min = distance;
 					projXPoints[0] = (this.getX() - objectXPoints[i]) / distance;
@@ -124,7 +124,7 @@ public class GameObject {
 			}
 
 			for(int i = 0; i < 1 + objectSides; i++){ // Check this's proj axies
-				double thisMax = vectorDotProduct(projXPoints[i], projYPoints[i], this.getX(), this.getY()) - this.getSize();
+				double thisMax = vectorDotProduct(projXPoints[i], projYPoints[i], this.getX(), this.getY()) + this.getSize();
 				double thisMin = vectorDotProduct(projXPoints[i], projYPoints[i], this.getX(), this.getY()) - this.getSize();
 				double objectMax = Integer.MIN_VALUE;
 				double objectMin = Integer.MAX_VALUE;
@@ -135,7 +135,7 @@ public class GameObject {
 					if(dotProduct < objectMin) objectMin = dotProduct;
 				}
 				// Check if they overlap
-				if((thisMax - objectMin > 0) || (objectMax - thisMin) > 0){
+				if((thisMax - objectMin < 0) || (objectMax - thisMin) < 0){
 					return false;
 				}
 			}
@@ -149,7 +149,7 @@ public class GameObject {
 			// Compile proj axis
 			double min = Integer.MAX_VALUE;
 			for(int i = 0; i < thisSides; i++){ // Find closes vert to circle
-				double distance = Math.sqrt( Math.pow((object.getX() - thisXPoints[i]), 2) + Math.pow((object.getY() - thisYPoints[i]), 2));
+				double distance =  Math.pow((object.getX() - thisXPoints[i]), 2) + Math.pow((object.getY() - thisYPoints[i]), 2);
 				if(distance < min){
 					min = distance;
 					projXPoints[0] = (object.getX() - thisXPoints[i]) / distance;
@@ -166,7 +166,7 @@ public class GameObject {
 			}
 
 			for(int i = 0; i < 1 + thisSides; i++){ // Check object's proj axies
-				double objectMax = vectorDotProduct(projXPoints[i], projYPoints[i], object.getX(), object.getY()) - object.getSize();
+				double objectMax = vectorDotProduct(projXPoints[i], projYPoints[i], object.getX(), object.getY()) + object.getSize();
 				double objectMin = vectorDotProduct(projXPoints[i], projYPoints[i], object.getX(), object.getY()) - object.getSize();
 				double thisMax = Integer.MIN_VALUE;
 				double thisMin = Integer.MAX_VALUE;
@@ -177,7 +177,7 @@ public class GameObject {
 					if(dotProduct < thisMin) thisMin = dotProduct;
 				}
 				// Check if they overlap
-				if((objectMax - thisMin > 0) || (thisMax - objectMin) > 0){
+				if((objectMax - thisMin < 0) || (thisMax - objectMin) < 0){
 					return false;
 				}
 			}
@@ -224,7 +224,7 @@ public class GameObject {
 				}
 
 				// Check if they overlap
-				if((thisMax - objectMin > 0) || (objectMax - thisMin) > 0){
+				if((thisMax - objectMin < 0) || (objectMax - thisMin) < 0){
 					return false;
 				}
 			}
