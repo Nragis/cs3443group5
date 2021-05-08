@@ -5,7 +5,8 @@ This game was created using soley JavaFX and Java standard libaries. Those respo
 # Coding Style
 We decided on the Google Java Coding Style for some consistency with the project. We were all forced to collaborate on this game remotely due to COVID-19 and the wishes of everyone invovled with the project. This made it easy for us to work on our seperate pieces of the game at our own available times while keeping everyone on the same page.
 
-# Screenshots
+# Launch
+- Run the code from class Launcher.java
 
 # Tech / Framework Used
 - JavaFX
@@ -14,7 +15,7 @@ We decided on the Google Java Coding Style for some consistency with the project
 - Eclipse
 
 # Features
-- Player can move anywhere on the canvas while ships weapons contiuasly shot. A simple single shot projectile laucher.
+- Player can move anywhere on the canvas while the player has control over ships weapons. A simple single shot projectile laucher.
 - Enemies spawn at random anywhere on the canvas as well. 
 
 # Credits
@@ -23,9 +24,5 @@ We decided on the Google Java Coding Style for some consistency with the project
 - Alec Layton
 - Caleb Rife
 
-#Known Buggs
-
-#Not Implemented
-- Leader Borad
-- Pause menu
-- Game Over Menu
+# Known Buggs
+-Connecting to leader board
