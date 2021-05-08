@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bullet_hell.controller.EndGameController">
+   <children>
+      <Label layoutX="279.0" layoutY="77.0" text="GAME OVER" textFill="WHITE" underline="true">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameTextField" layoutX="315.0" layoutY="323.0" promptText="NAME" />
+      <Button fx:id="proceedButton" layoutX="365.0" layoutY="396.0" mnemonicParsing="false" onAction="#proceedButtonPressed" text="Proceed" />
+      <Label fx:id="scoreLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="240.0" layoutY="185.0" prefHeight="25.0" prefWidth="340.0" text="Score: 0" textAlignment="RIGHT" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="stageLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="240.0" layoutY="215.0" prefHeight="25.0" prefWidth="340.0" text="Stage: 1" textAlignment="RIGHT" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="timePlayedLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="240.0" layoutY="245.0" prefHeight="25.0" prefWidth="340.0" text="Time Played: 0" textAlignment="RIGHT" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="bulletsFiredLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="240.0" layoutY="275.0" prefHeight="25.0" prefWidth="340.0" text="Bullets Fired: 0" textAlignment="RIGHT" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

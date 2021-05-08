@@ -1,11 +1,28 @@
 package bullet_hell.model;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 public class Bullet extends GameObject{
-
+	private static final double BULLET_SIZE = 2.0;
+	private boolean friendly;
+	private boolean remove;
+	
 	public Bullet() {
-		super(new Circle(5, 5, 5, Color.BROWN));
+		super(Shape.CIRCLE, BULLET_SIZE);
+	}
+
+	public boolean isFriendly(){
+		return this.friendly;
+	}
+
+	public void setFriendly(boolean friendly){
+		this.friendly = friendly;
+	}
+
+	public void remove(){
+		this.remove = true;
+	}
+
+	public boolean isRemove(){
+		return this.remove;
 	}
 }

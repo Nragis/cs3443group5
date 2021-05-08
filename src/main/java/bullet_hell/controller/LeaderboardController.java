@@ -2,6 +2,7 @@ package bullet_hell.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,11 +56,12 @@ public class LeaderboardController{
 			this.localLeaderboard= new Leaderboard();
 		}
 		
-		RemoteLeaderboard remoteLeaderboard = new RemoteLeaderboard("nragis.com");
-		System.out.println("Remote leaderboard opened");
-
-		this.globalLeaderboard = remoteLeaderboard.getLeaderboard();
-		System.out.println("Remote leaderboard recieved");
+		try{
+			RemoteLeaderboard remoteLeaderboard = new RemoteLeaderboard("nragis.com");
+			this.globalLeaderboard = remoteLeaderboard.getLeaderboard();
+		}catch( RemoteException e ){
+			System.out.println("Cannot reach global leaderboard");
+		}
 		
 		this.newRow.setPrefHeight(50);
 		
@@ -75,17 +77,25 @@ public class LeaderboardController{
 			this.localLeaderboardGridPane.add(score, 1, i);
 		}
 
-		names = this.globalLeaderboard.getNames();
-		scores = this.globalLeaderboard.getScores();
-		for(int i = 0; i < names.length; i++){
-			Label name = new Label(names[i] + " - ");
-			Label score = new Label(Integer.toString(scores[i]));
-			name.setFont(new Font(16));
-			score.setFont(new Font(16));
+		if(this.globalLeaderboard != null){
+			names = this.globalLeaderboard.getNames();
+			scores = this.globalLeaderboard.getScores();
+			for(int i = 0; i < names.length; i++){
+				Label name = new Label(names[i] + " - ");
+				Label score = new Label(Integer.toString(scores[i]));
+				name.setFont(new Font(16));
+				score.setFont(new Font(16));
+				this.globalLeaderboardGridPane.getRowConstraints().add(newRow);
+				this.globalLeaderboardGridPane.add(name, 0, i);
+				this.globalLeaderboardGridPane.add(score, 1, i);
+			}
+		}else{
+			Label label = new Label("Cannot reach global leaderboard");
 			this.globalLeaderboardGridPane.getRowConstraints().add(newRow);
-			this.globalLeaderboardGridPane.add(name, 0, i);
-			this.globalLeaderboardGridPane.add(score, 1, i);
+			this.globalLeaderboardGridPane.add(label, 0, 0);
+			
 		}
+
 	}
 }
 
