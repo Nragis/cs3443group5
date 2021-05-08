@@ -13,10 +13,14 @@ We decided on the Google Java Coding Style for some consistency with the project
 - Java
 - Github
 - Eclipse
+- Maven
 
 # Features
 - Player can move anywhere on the canvas while the player has control over ships weapons. A simple single shot projectile laucher.
 - Enemies spawn at random anywhere on the canvas as well. 
+- A local leaderboard and statistics tracker using json
+- A global leaderboard
+- Ramping difficulty based on how long the player has been playing
 
 # Credits
 - David Jackson
