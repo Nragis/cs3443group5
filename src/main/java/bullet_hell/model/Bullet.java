@@ -2,7 +2,7 @@ package bullet_hell.model;
 
 
 public class Bullet extends GameObject{
-	private static final double BULLET_SIZE = 5.0;
+	private static final double BULLET_SIZE = 2.0;
 	private boolean friendly;
 	private boolean remove;
 	
